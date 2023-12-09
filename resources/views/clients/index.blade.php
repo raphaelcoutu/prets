@@ -2,6 +2,8 @@
 
 <ul>
 @foreach($clients as $client)
-    <li>{{ $client->name  }} ({{ $client->banner }})</li>
+    <li><a href="/clients/{{$client->id}}">{{ $client->name  }} ({{ $client->banner }})</a></li>
 @endforeach
 </ul>
+
+<a href="/">Accueil</a>
