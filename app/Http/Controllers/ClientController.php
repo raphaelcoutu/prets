@@ -15,7 +15,7 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
-        return view('clients.index', [
+        return Inertia::render('Clients/Index', [
             'clients' => $clients
         ]);
     }
