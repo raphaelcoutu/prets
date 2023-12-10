@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
@@ -24,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Clients/Create');
     }
 
     /**
@@ -32,7 +33,13 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        Client::create($request->all());
+
+        return Inertia::location('/clients');
     }
 
     /**
@@ -48,7 +55,9 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return Inertia::render('Clients/Edit', [
+            'client' => $client
+        ]);
     }
 
     /**
@@ -56,7 +65,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+            'banner' => 'required'
+        ]);
+
+        $client->update($request->all());
+
+        return Inertia::location('/clients');
     }
 
     /**
